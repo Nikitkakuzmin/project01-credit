@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-user-service-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: userapp
+  template:
+    metadata:
+      labels:
+        app: userapp
+    spec:
+      containers:
+      - name: credit-user-service
+        image: nikitkamzgb/credit-user-service-iso 
+        ports:
+        - containerPort: 7101
+        env:
+        - name: SERVER_PORT
+          value: "7101"
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://host.docker.internal:1004/postgres?autoreconnect=true"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "postgres"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "qwe"
+        - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+          value: "${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}"
+        - name: KEYCLOAK_URL
+          value: "http://localhost:8081/auth"
+        - name: KEYCLOAK_REALM
+          value: "credit-user-service-dev"
+        - name: KEYCLOAK_CLIENT_ID
+          value: "user-service-client"
+        - name: KEYCLOAK_CLIENT_SECRET
+          value: "blhsoT9sfuLCewuwWEiFuql70xYRhrNX"
+        - name: KEYCLOAK_USERNAME
+          value: "admin"
+        - name: KEYCLOAK_PASSWORD
+          value: "admin"
+        - name: KEYCLOAK_GRANT_TYPE
+          value: "password"
+        - name: BANK1_FEIGN_CLIENT_URL
+          value: "http://localhost:7771"
+        - name: BANK2_FEIGN_CLIENT_URL
+          value: "http://localhost:7772"
+        - name: BANK3_FEIGN_CLIENT_URL
+          value: "http://localhost:7773"
+        - name: CREDIT_CREDIT_CLIENT_URL
+          value: "http://localhost:7774"

@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  credit-bank-3:
+    image: 'nikitkamzgb/credit-bank-3-iso'
+    container_name: 'credit-bank-3-container'
+    depends_on:
+      - credit-bank3-db
+    environment:
+      - SERVER_PORT=7773
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://credit-bank3-db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=qwe
+    ports:
+      - 8773:7773
+
+  credit-bank3-db:
+    image: 'postgres'
+    container_name: 'credit-bank3-db-container' 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1003:5432

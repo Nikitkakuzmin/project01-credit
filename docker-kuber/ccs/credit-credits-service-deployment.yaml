@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-credits-service-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: creditapp
+  template:
+    metadata:
+      labels:
+        app: creditapp
+    spec:
+      containers:
+      - name: credit-credits-service
+        image: nikitkamzgb/credit-credits-service-iso 
+        ports:
+        - containerPort: 8774
+        env:
+        - name: SERVER_PORT
+          value: "8774"
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://host.docker.internal:1005/postgres?autoreconnect=true"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "postgres"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "qwe"
+        - name: USER_FEIGN_CLIENT_URL
+          value: "http://localhost:7001"
+        

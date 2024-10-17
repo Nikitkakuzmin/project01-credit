@@ -1,0 +1,46 @@
+version: '3.1'
+services:
+  credit-bank-1-db:
+    image: 'postgres:14'
+    container_name: 'credit-bank-1-db-container'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1001:5432
+
+  credit-bank-2-db:
+    image: 'postgres:14'
+    container_name: 'credit-bank-2-db-container'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1002:5432
+
+  credit-bank-3-db:
+    image: 'postgres:14'
+    container_name: 'credit-bank-3-db-container'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1003:5432
+
+  credit-credits-db:
+    image: 'postgres:14'
+    container_name: 'credit-credits-db-container' 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1005:5432
+
+  credit-user-db:
+    image: 'postgres:14'
+    container_name: 'credit-user-db-container' 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1004:5432

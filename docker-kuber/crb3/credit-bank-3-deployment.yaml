@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: credit-bank-3-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bank3app
+  template:
+    metadata:
+      labels:
+        app: bank3app
+    spec:
+      containers:
+      - name: credit-bank-3-deployment
+        image: nikitkamzgb/credit-bank-3-iso
+        ports:
+        - containerPort: 8103
+        env:
+        - name: SERVER_PORT
+          value: "8103"
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://host.docker.internal:1003/postgres?autoreconnect=true"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "postgres"  
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "qwe"
+        - name: SPRING_DATASOURCE_HIKARI_CONNECTION-TIMEOUT
+          value: "60000"  
+        - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+          value: "org.hibernate.dialect.PostgreSQLDialect"

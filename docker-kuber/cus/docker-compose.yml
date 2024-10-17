@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  credit-user-service:
+    image: 'nikitkamzgb/credit-user-service-iso'
+    container_name: 'credit-user-service-container'
+    depends_on:
+      - credit-user-db
+    environment:
+      - SERVER_PORT=7001
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://credit-user-db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=qwe
+    ports:
+      - 7011:7001
+
+  credit-user-db:
+    image: 'postgres'
+    container_name: 'credit-user-db-container' 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1004:5432

@@ -1,0 +1,23 @@
+version: '3.1'
+services:
+  credit-bank-1:
+    image: 'nikitkamzgb/credit-bank-1-iso'
+    container_name: 'credit-bank-1-container'
+    depends_on:
+      - credit-bank1-db
+    environment:
+      - SERVER_PORT=7771
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://credit-bank1-db:5432/postgres?autoreconnect=true
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=qwe
+    ports:
+      - 8771:7771
+
+  credit-bank1-db:
+    image: 'postgres'
+    container_name: 'credit-bank1-db-container' 
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwe
+    ports:
+      - 1001:5432
